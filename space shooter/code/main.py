@@ -2,6 +2,8 @@
 import pygame
 from os.path import join
 
+from random import randint
+
 # pygame setup
 pygame.init() #initializes pygame, needed for things to run properly
 WINDOW_WIDTH, WINDOW_HEIGHT = 1280, 720
@@ -16,11 +18,13 @@ surf.fill("red")
 x=100
 
 #importing an image
-path = join('..', 'images', 'player.png')
-print(path)
-player_surf = pygame.image.load(path).convert_alpha()
+player_path = join('..', 'images', 'player.png')
+# print(player_path)
+player_surf = pygame.image.load(player_path).convert_alpha()
+star_surf = pygame.image.load(join('..', 'images', 'star.png')).convert_alpha()
 
 while running:
+    
     # event loop
     for event in pygame.event.get():
         if event.type == pygame.QUIT: # pygame.QUIT event means the user clicked X to close your window
@@ -31,6 +35,10 @@ while running:
     x += .1
     display_surface.blit(surf, (150,150))
     display_surface.blit(player_surf, (x,100))
+    for i in range(20):
+        display_surface.blit(
+            star_surf, (randint(0, WINDOW_WIDTH), (randint(0, WINDOW_HEIGHT))
+            ))
 
     pygame.display.update() #updates the whole window
 
